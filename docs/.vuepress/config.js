@@ -2,6 +2,7 @@ module.exports = {
   title: 'Pega eXPerience',
   themeConfig: {
     logo: '/images/pegaxp.svg',
+    logoDark: '/images/pegaxp-dark.svg',
 
     navbar: [
       {

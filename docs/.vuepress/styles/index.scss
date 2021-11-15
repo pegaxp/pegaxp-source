@@ -3,11 +3,18 @@
     --c-brand-light: #51a7fd;
     --content-width: 1200px;
 }
-
 .site-name {
     display: none;
 }
 
 h1 {
     color: #2a388f;
+}
+
+html.dark {
+    --c-brand: #adbac7;
+
+    h1 {
+        color: #adbac7;
+    }
 }
