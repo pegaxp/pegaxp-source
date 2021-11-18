@@ -28,6 +28,7 @@ module.exports = {
           text: 'Referência',
           children: [
             '/reference/README.md',
+            '/reference/class.md',
             '/reference/data-page.md',
             '/reference/service-rest.md'
           ]
