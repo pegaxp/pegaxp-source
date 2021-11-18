@@ -1,5 +1,12 @@
 module.exports = {
   title: 'Pega eXPerience',
+
+  plugins: [
+    ['@vuepress/plugin-google-analytics', {
+      id: 'G-CPQN4EHJWQ'
+    }]
+  ],
+
   themeConfig: {
     logo: '/images/pegaxp.svg',
     logoDark: '/images/pegaxp-dark.svg',
