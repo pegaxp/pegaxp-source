@@ -28,6 +28,10 @@ jobs:
       - working-directory: ./pegaxp
         run: mv -v ../docs/.vuepress/dist/* .
       - working-directory: ./pegaxp
+        run: git config --global user.email "ianlucas_ferreira@hotmail.com"
+      - working-directory: ./pegaxp
+        run: git config --global user.name "Ian Lucas"
+      - working-directory: ./pegaxp
         run: git add --all
       - working-directory: ./pegaxp
         run: git commit -m "Automated deployment"
