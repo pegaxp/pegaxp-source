@@ -22,3 +22,10 @@ jobs:
           node-version: '16'
       - run: npm install
       - run: npm run build
+      - run: git clone https://github.com/pegaxp/pegaxp.git
+      - run: cd pegaxp
+      - run: ls | grep -v CNAME | xargs rm
+      - run: mv -v ../docs/.vuepress/dist/* .
+      - run: git add --all
+      - run: git commit -m "Automated deployment"
+      - run: git push
