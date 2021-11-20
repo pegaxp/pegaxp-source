@@ -29,13 +29,13 @@ jobs:
         run: ls | grep -v CNAME | xargs rm -r
       - working-directory: ./pegaxp
         run: mv -v ../docs/.vuepress/dist/* .
-      - working-directory: ./pegaxp
-        run: git config --global user.email "ianlucas_ferreira@hotmail.com"
-      - working-directory: ./pegaxp
-        run: git config --global user.name "Ian Lucas"
-      - working-directory: ./pegaxp
-        run: git add --all
-      - working-directory: ./pegaxp
-        run: git commit -m "Automated deployment"
-      - working-directory: ./pegaxp
-        run: git push
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: './pegaxp'
+          destination-github-username: 'pegaxp'
+          destination-repository-name: 'pegaxp'
+          user-email: ianlucas_ferreira@hotmail.com
+          target-branch: main
