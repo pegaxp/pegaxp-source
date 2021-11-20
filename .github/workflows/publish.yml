@@ -24,7 +24,7 @@ jobs:
       - run: npm run build
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: git clone https://user:$GITHUB_TOKEN@github.com/pegaxp.git
+        run: git clone https://user:$GITHUB_TOKEN@github.com/pegaxp/pegaxp.git
       - working-directory: ./pegaxp
         run: ls | grep -v CNAME | xargs rm -r
       - working-directory: ./pegaxp
