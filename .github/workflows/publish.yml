@@ -1,37 +1,57 @@
-# This is a basic workflow to help you get started with Actions
+name: publish
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  # trigger deployment on every push to main branch
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [main]
+  # trigger deployment manually
   workflow_dispatch:
 
 jobs:
-  build:
+  docs:
     runs-on: ubuntu-latest
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
+          # fetch all commits to get last updated time or other git log info
           fetch-depth: 0
-      - uses: actions/setup-node@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: '16'
-      - run: npm install
-      - run: npm run build
-      - run: git clone https://user:${{ secrets.GITHUB_TOKEN }}@github.com/pegaxp/pegaxp.git
-      - working-directory: ./pegaxp
-        run: |
-          ls | grep -v CNAME | xargs rm -r
-          mv -v ../docs/.vuepress/dist/* .
-          git config --global user.email "ianlucas_ferreira@hotmail.com"
-          git config --global user.name "Ian Lucas"
-          git add --all
-          git commit -m "Automated deployment"
-          git config -l
-          git push
+          # choose node.js version to use
+          node-version: '14'
+
+      # cache node_modules
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # install dependencies if the cache did not hit
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+
+      # run build script
+      - name: Build VuePress site
+        run: yarn docs:build
+
+      # please check out the docs of the workflow for more details
+      # @see https://github.com/crazy-max/ghaction-github-pages
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          # deploy to gh-pages branch
+          target_branch: gh-pages
+          # deploy the default output dir of VuePress
+          build_dir: docs/.vuepress/dist
+        env:
+          # @see https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
