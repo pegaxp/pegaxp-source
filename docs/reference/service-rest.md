@@ -8,7 +8,7 @@
 
 ### Descrição do serviço
 
-Este serviço é responsável por chamar um Container para obter a melhor oferta a ser oferecida ao cliente. As ofertas retornam com um InteractionID que pode ser utilizado no serviço exposto que captura intrações, CaptureResponse.
+Este serviço é responsável por chamar um Container para obter a melhor oferta a ser oferecida ao cliente. As ofertas retornam com um InteractionID que pode ser utilizado no serviço exposto que captura intrações, [CaptureResponse](#captureresponse).
 
 ### Estrutura do serviço
 
