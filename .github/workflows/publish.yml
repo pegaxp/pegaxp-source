@@ -31,5 +31,5 @@ jobs:
           git config --global user.name "Ian Lucas"
           git add --all
           git commit -m "Automated deployment"
-          git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
+          git config -l
           git push
