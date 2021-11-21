@@ -27,8 +27,6 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Create CNAME file
-        run: echo "pegaxp.org" > CNAME
       - name: Install dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
@@ -39,5 +37,6 @@ jobs:
         with:
           target_branch: gh-pages
           build_dir: docs/.vuepress/dist
+          fqdn: pegaxp.org
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
