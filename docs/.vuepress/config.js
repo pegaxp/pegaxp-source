@@ -50,6 +50,7 @@ module.exports = {
           text: 'Pega Marketing',
           children: [
             '/guide/pega-marketing/README.md',
+            '/guide/pega-marketing/connecting-to-cassandra.md',
             '/guide/pega-marketing/capturing-unique-impression-and-click.md'
           ]
         }
